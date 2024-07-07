@@ -1,14 +1,9 @@
-const { endOfLine } = require("./.prettierrc")
+require('./.prettierrc');
 
 module.exports = {
   root: true,
   extends: '@react-native',
   rules: {
-    "prettier/prettier": [
-      "error",
-      {
-        "endOfLine": "lf"
-      }
-    ]
-  }
+    'prettier/prettier': 0,
+  },
 };
