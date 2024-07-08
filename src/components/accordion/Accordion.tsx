@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode, useContext, useEffect, useRef, useState } from 'react';
-import { Animated, LayoutChangeEvent, TouchableOpacity, View } from 'react-native';
+import { Animated, LayoutChangeEvent, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 interface AccordionContextType {
   currentKey : number | null;
@@ -88,39 +88,41 @@ interface AccordionBodyProps {
 export const AccordionBody: React.FC<AccordionBodyProps> = ({children, isOpen}) => {
 
   const animatedHeight = useRef(new Animated.Value(0)).current;
-
-  const bodyRef = useRef<View>(null);
-
+  const [bodyHeight, setBodyHeight] = useState(0);
   const handleLayout = (e: LayoutChangeEvent) => {
     const { height } = e.nativeEvent.layout;
+    setBodyHeight(height);
     return height;
   };
 
   useEffect(() => {
 
     Animated.timing(animatedHeight, {
-      toValue: isOpen ? 50 : 0,
-      duration: 600,
+      toValue: isOpen ? bodyHeight : 0,
+      duration: 500,
       useNativeDriver: false,
     }).start();
+  }, [isOpen, bodyHeight, animatedHeight]);
 
-    // if (bodyRef.current) {
-    //   bodyRef.current.setNativeProps({
-    //     style: { maxHeight: isOpen ? handleLayout : 0 },
-    //   });
-    // }
-  }, [isOpen]);
 
+  const styles = StyleSheet.create({
+    container: {
+      height: animatedHeight,
+      overflow: 'hidden',
+    },
+    body: {
+      position: 'absolute',
+    },
+  });
 
   return (
-   <Animated.View style={{height: animatedHeight}}>
-     <View
-       ref={bodyRef}
-       onLayout={handleLayout}
-     >
-       {children}
-     </View>
+   <Animated.View style={styles.container}>
+    <View
+      style={styles.body}
+      onLayout={handleLayout}
+    >
+      {children}
+    </View>
    </Animated.View>
   );
 };
-
