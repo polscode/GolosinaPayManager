@@ -108,21 +108,20 @@ export const AccordionBody: React.FC<AccordionBodyProps> = ({children, isOpen}) 
   const styles = StyleSheet.create({
     container: {
       height: animatedHeight,
-      overflow: 'hidden',
-    },
-    body: {
-      position: 'absolute',
     },
   });
 
   return (
-   <Animated.View style={styles.container}>
-    <View
-      style={styles.body}
-      onLayout={handleLayout}
+    <Animated.View
+    style={styles.container}
+    className={`overflow-hidden h-[${animatedHeight}]`}
     >
-      {children}
-    </View>
-   </Animated.View>
+      <View
+        className="absolute"
+        onLayout={handleLayout}
+      >
+        {children}
+      </View>
+    </Animated.View>
   );
 };
