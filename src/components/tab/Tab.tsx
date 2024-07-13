@@ -1,5 +1,5 @@
 import React, { ReactNode, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 interface TabProps {
   children: ReactNode;
@@ -27,36 +27,43 @@ export const Tabs: React.FC<TabsProps> = ({children}) => {
   };
 
   return (
-    <View className="justify-between flex flex-col">
-      <View className=" flex flex-row">
+    <View className="flex flex-col bg-slate-600 flex-1">
+      <ScrollView>
+        {React.Children.map(children, (tab, index) => (
+          <View
+            key={index}
+            className={`${activeTab !== index && 'hidden'} pb-[100px]`}
+          >
+            {tab}
+          </View>
+        ))}
+      </ScrollView>
+      <View className=" flex flex-row bg-red-500 justify-between p-[14px] absolute w-full bottom-0">
         {
           React.Children.map(children, (tab, index)=>(
             <TouchableOpacity
-              className="w-24 h-16 bg-slate-900"
+              className="w-16 h-16 bg-slate-900 flex-col justify-between"
               key={index}
               onPress={() => changeTab(index)}
             >
-              <Text className={`${index === activeTab && 'font-bold text-orange-500'}  flex flex-col justify-between text-gray-300`}>
-
+              <Text className={`${index === activeTab && 'font-bold text-orange-500'}  text-gray-300 text-center bg-blue-400 h-12`}>
+                $
                 {React.isValidElement(tab) && tab.props.icon}
-              <Text className={`${index === activeTab ? 'font-bold text-orange-500' : 'text-gray-300' } text-xl text-center pb-2 `}>
-                {React.isValidElement(tab) && tab.props.title}
               </Text>
+              <Text className={`${index === activeTab ? 'font-bold text-orange-500' : 'text-gray-300' } text-center bg-purple-400`}>
+                {React.isValidElement(tab) && tab.props.title}
               </Text>
             </TouchableOpacity>
           ))
         }
       </View>
-      <View>
-        {React.Children.map(children, (tab, index) => (
-          <View
-            key={index}
-            className={`${activeTab !== index && 'hidden'}`}
-          >
-            {tab}
-          </View>
-        ))}
-      </View>
     </View>
   );
 };
+
+// const styles = StyleSheet.create({
+//   tabsContainer: {
+//     position: 'absolute',
+//     bottom: 0,
+//   },
+// });
