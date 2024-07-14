@@ -1,9 +1,10 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactElement, ReactNode, useState } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 interface TabProps {
   children: ReactNode;
   title: string;
+  icon?: ReactElement;
 }
 
 export const Tab: React.FC<TabProps> = ({children}) => {
@@ -27,43 +28,43 @@ export const Tabs: React.FC<TabsProps> = ({children}) => {
   };
 
   return (
-    <View className="flex flex-col bg-slate-600 flex-1">
-      <ScrollView>
+    <View className="flex flex-col bg-[#070707] flex-1">
+      <ScrollView className="mt-2">
         {React.Children.map(children, (tab, index) => (
           <View
             key={index}
-            className={`${activeTab !== index && 'hidden'} pb-[100px]`}
+            className={`${activeTab !== index && 'hidden'} pb-[100px] px-2`}
           >
             {tab}
           </View>
         ))}
       </ScrollView>
-      <View className=" flex flex-row bg-red-500 justify-between p-[14px] absolute w-full bottom-0">
+      <View className=" flex flex-row bg-[#070707] justify-between p-[14px] absolute w-full bottom-0">
         {
-          React.Children.map(children, (tab, index)=>(
-            <TouchableOpacity
-              className="w-16 h-16 bg-slate-900 flex-col justify-between"
-              key={index}
-              onPress={() => changeTab(index)}
-            >
-              <Text className={`${index === activeTab && 'font-bold text-orange-500'}  text-gray-300 text-center bg-blue-400 h-12`}>
-                $
-                {React.isValidElement(tab) && tab.props.icon}
-              </Text>
-              <Text className={`${index === activeTab ? 'font-bold text-orange-500' : 'text-gray-300' } text-center bg-purple-400`}>
-                {React.isValidElement(tab) && tab.props.title}
-              </Text>
-            </TouchableOpacity>
-          ))
+          React.Children.map(children, (tab, index)=> {
+            if (!React.isValidElement(tab)) {
+              return null;
+            }
+
+            const {title, icon} = tab.props;
+            return (
+              <TouchableOpacity
+                className="w-16 h-16 flex-col justify-between"
+                key={index}
+                onPress={() => changeTab(index)}
+              >
+                <View className={`${index === activeTab && 'font-bold text-orange-500 '} justify-center items-center text-gray-300 h-10`}>
+                  {icon && React.cloneElement(icon, { size: 30, color: index === activeTab ? '#FF5733' : '#fff' })}
+                </View>
+                <Text className={`${index === activeTab ? 'font-bold text-orange-500' : 'text-gray-300 '}  pb-[5px] text-center`}>
+                  {title}
+                </Text>
+              </TouchableOpacity>
+            );
+          })
         }
       </View>
     </View>
   );
 };
 
-// const styles = StyleSheet.create({
-//   tabsContainer: {
-//     position: 'absolute',
-//     bottom: 0,
-//   },
-// });
