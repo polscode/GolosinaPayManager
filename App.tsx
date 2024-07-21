@@ -4,21 +4,18 @@ import { Tab, Tabs } from './src/components/tab/Tab';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Button from './src/components/Button';
 import TitleIcon from './src/components/TitleIcon';
+import InputSearch from './src/components/InputSearch';
+import SearchPage from './src/screens/SearchPage';
 
 const App = () => {
   return (
-    
     <Tabs>
       <Tab title={'Buscar'} icon={<MaterialCommunityIcons name="clipboard-text-search-outline"/>}>
-        <Text className="text-white">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur ratione porro et unde dolorum deleniti, earum ut veniam, aperiam repudiandae beatae totam similique in saepe optio commodi modi, temporibus vel? Impedit eius et non sapiente perspiciatis ipsum libero fuga iure! Impedit voluptatem atque quibusdam distinctio nemo sapiente! Quos minima quibusdam pariatur earum! Minima velit voluptate ea accusantium repellendus eaque ex similique labore repudiandae eius doloremque perferendis, alias illum debitis. Dolore cupiditate molestias voluptate dicta repellat molestiae fugiat ex. Aliquam nihil quibusdam maiores consequuntur? Dolores neque necessitatibus obcaecati soluta eum, tenetur enim dolorem, at error impedit exercitationem? Natus fugiat eaque consequuntur.
-        </Text>
+        <SearchPage />
       </Tab>
       <Tab title={'tab 2'}>
-        <Text className="text-white" >
-        contenido del tab 2
-        <Button name="click" />
-        </Text>
+        <Text>hello</Text>
+        <InputSearch/>
       </Tab>
       <Tab title={'tab 3'}>
         <Text >

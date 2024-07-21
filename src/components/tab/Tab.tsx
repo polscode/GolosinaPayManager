@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode, useState } from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 interface TabProps {
   children: ReactNode;
@@ -29,7 +29,7 @@ export const Tabs: React.FC<TabsProps> = ({children}) => {
 
   return (
     <View className="flex flex-col bg-[#070707] flex-1">
-      <ScrollView className="mt-2">
+      <View className="mt-2">
         {React.Children.map(children, (tab, index) => (
           <View
             key={index}
@@ -38,7 +38,7 @@ export const Tabs: React.FC<TabsProps> = ({children}) => {
             {tab}
           </View>
         ))}
-      </ScrollView>
+      </View>
       <View className=" flex flex-row bg-[#070707] justify-between p-[14px] absolute w-full bottom-0">
         {
           React.Children.map(children, (tab, index)=> {
