@@ -4,8 +4,8 @@ import { Tab, Tabs } from './src/components/tab/Tab';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Button from './src/components/Button';
 import TitleIcon from './src/components/TitleIcon';
-import InputSearch from './src/components/InputSearch';
 import SearchPage from './src/screens/SearchPage';
+import PlanillaScreen from './src/screens/PlanillaScreen';
 
 const App = () => {
   return (
@@ -13,9 +13,8 @@ const App = () => {
       <Tab title={'Buscar'} icon={<MaterialCommunityIcons name="clipboard-text-search-outline"/>}>
         <SearchPage />
       </Tab>
-      <Tab title={'tab 2'}>
-        <Text>hello</Text>
-        <InputSearch/>
+      <Tab title={'Planilla'} icon={<MaterialCommunityIcons name="text-box"/>}>
+        <PlanillaScreen />
       </Tab>
       <Tab title={'tab 3'}>
         <Text >

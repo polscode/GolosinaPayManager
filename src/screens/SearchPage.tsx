@@ -82,7 +82,7 @@ const ItemList = ({ serial, date }: ItemProps ) => {
         </Text>
       </View>
       <View>
-      <TouchableOpacity className="bg-">
+      <TouchableOpacity >
         <LinearGradient
           colors={['#f56f03', '#ff3000']}
           start={{ x: 0.5, y: 0 }}

@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         'orange-light': '#f56f03',
         'orange-dark': '#ff3000',
+        'op-dark': 'rgba(0,0,0,0.5)',
       },
     },
   },

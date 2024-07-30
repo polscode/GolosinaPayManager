@@ -29,7 +29,7 @@ const InputSearch: React.FC<InputSearchProps> = ({label, onPress}) => {
         </LinearGradient>
       </TouchableOpacity>
       <TextInput
-        className=" text-white w-[250]"
+        className=" text-white w-[250] text-base font-bold"
         keyboardType="numeric"
         value={input}
         onChangeText={setInput}

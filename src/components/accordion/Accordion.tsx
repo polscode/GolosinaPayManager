@@ -99,7 +99,7 @@ export const AccordionBody: React.FC<AccordionBodyProps> = ({children, isOpen}) 
 
     Animated.timing(animatedHeight, {
       toValue: isOpen ? bodyHeight : 0,
-      duration: 500,
+      duration: 300,
       useNativeDriver: false,
     }).start();
   }, [isOpen, bodyHeight, animatedHeight]);
